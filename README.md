@@ -4,7 +4,7 @@ Steps to run:
 
 2. Open a terminal in the directory you want the project in
 
-3. Run this command: git clone https://github.com/CharlesC234/virtual_library_frontend.git
+3. Run this command: git clone https://github.com/CharlesC234/virtual_library_frontend_v2.git
 
 4. CD into the newly created folder: cd virtual_library_frontend
 
