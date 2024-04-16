@@ -3,12 +3,14 @@
 export default async function Main() {
     return <main>
         
+        {/* Header */}
         <div class="text-5xl font-extrabold ...">
-  <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-50 to-blue-500">
-    Main Page
-    </span>
-    </div>  
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-50 to-blue-500">
+            Main Page
+            </span>
+        </div>  
         
+        {/* Test button */}
         <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
             Test Button
         </button>
