@@ -1,3 +1,19 @@
+Steps to run:
+
+1. Install node from here: https://nodejs.org/en/download (if not already installed) (use node -v to see if installed)
+
+2. Open a terminal in the directory you want the project in
+
+3. Run this command: git clone https://github.com/CharlesC234/virtual_library_frontend.git
+
+4. CD into the newly created folder: cd virtual_library_frontend
+
+5. Run this command to install all required dependencies: npm install
+
+6. Run the project with the following command: npm run dev
+
+7. View the project in a web browser at http://localhost:3000 (port may switch to 3001 if port is taken)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
