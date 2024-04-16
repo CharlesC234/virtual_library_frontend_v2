@@ -4,7 +4,7 @@ export default async function Main() {
     return <main>
         <div class="text-5xl font-extrabold ...">
   <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-50 to-blue-500">
-    Main Page
+    Virtual Library
     </span>
     </div>  
         
