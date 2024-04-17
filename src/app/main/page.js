@@ -4,12 +4,12 @@ import Main from "./main";
 
 export default async function MainPage({}) {
   
-  let dataNew = null;
+  let newHomeData, newBooksData = null;
 
-  async function getStrapiData(){
-    const baseUrl = "https://virtuallibrarybackendstrapi-production.up.railway.app/api/home-page";
+  async function getStrapiData(path){
+    const baseUrl = "https://virtuallibrarybackendstrapi-production.up.railway.app/api/";
     try{
-        const response = await fetch(baseUrl);
+        const response = await fetch(baseUrl + path);
         const data = await response.json();
         return data;
     }
@@ -18,12 +18,16 @@ export default async function MainPage({}) {
     }
   }
 
-  dataNew = await getStrapiData();
+  newHomeData = await getStrapiData("home-page");
+  newBooksData = await getStrapiData("books/1");
 
   return (
 
     <div>
-      <Main data={dataNew}/>
+      <Main 
+      homeData={newHomeData}
+      booksData={newBooksData}
+      />
     </div>
   );
 }
