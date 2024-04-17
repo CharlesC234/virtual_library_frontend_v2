@@ -1,21 +1,34 @@
 "use client";
+import {getStrapiData} from "./page.js";
 
-export default async function Main() {
+/*
+In order to access the variable fetched from the database if it is a collection type it will be in an array.
+if it is a single type then it will be just a normal variable call appended to the end of the stored value
+as seen there is data(name of variable) .data(this is where either the array is present or not)
+.attributes(this is where each of the fields of the given piece of data are) .nameofattribute(this can be whatever name you want of which attribute)
+*/
+
+export default function Main({data}) {
+
     return <main>
         
-        {/* Header */}
+        <h1 className="bg-red-500 text-5xl font-bold">{data.data.attributes.title}</h1>
+        <p className="bg-red-500 text-xl mt-4">{data.data.attributes.description}</p>
+
+{/*     Commenting out basic testing text     
+        
         <div class="text-5xl font-extrabold ...">
             <span class="bg-clip-text text-transparent bg-gradient-to-r from-gray-50 to-blue-500">
             Main Page
             </span>
         </div>  
         
-        {/* Test button */}
+        
         <button class="bg-blue-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
             Test Button
         </button>
 
-        {/* Search bar */}
+        
         <div
             class="relative flex"
             data-twe-input-wrapper-init
@@ -52,7 +65,8 @@ export default async function Main() {
                 </svg>
                 </span>
             </button>
-        </div>
+        </div> 
+*/}
 
     </main>
     
