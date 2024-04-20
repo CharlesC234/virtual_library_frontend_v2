@@ -18,15 +18,28 @@ export default async function MainPage({}) {
     }
   }
 
-  newHomeData = await getStrapiData("home-page");
-  newBooksData = await getStrapiData("books/1");
+  async function navigateToPage(){
+    try{
+      
+    }
+    catch(error){
+      console.error(error);
+    }
+  }
+
+  //newHomeData = await getStrapiData("home-page");
+  newBooksData = await getStrapiData("books?populate[cover][populate]=*");
 
   return (
 
     <div>
       <Main 
-      homeData={newHomeData}
+      
+      //homeData={newHomeData}
       booksData={newBooksData}
+
+
+
       />
     </div>
   );
