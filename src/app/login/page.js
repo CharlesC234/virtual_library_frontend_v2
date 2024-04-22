@@ -115,7 +115,7 @@ export default function Login({children}) {
 
   if(!approved){
 
-    if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null"){
+    if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null" || localStorage.getItem("username") == null || localStorage.getItem("password") == null || !localStorage.getItem("password") || !localStorage.getItem("username")){
       return (
 
 
