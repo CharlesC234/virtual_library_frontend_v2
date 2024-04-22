@@ -20,7 +20,7 @@ export default async function MainPage({}) {
 
   async function navigateToPage(){
     try{
-      
+
     }
     catch(error){
       console.error(error);
@@ -35,7 +35,6 @@ export default async function MainPage({}) {
     <div>
       <Main 
       
-      //homeData={newHomeData}
       booksData={newBooksData}
 
 
