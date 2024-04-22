@@ -62,9 +62,11 @@ export default function RootLayout({ children }) {
       const username = localStorage.getItem("username");
       getBooksForUser(username);
       }
+      if(bookArray != null && bookArray.length > 0){
       sortByLevenshteinDistance(bookArray, inputStr).then((res) => {
         setSortedArray(res);
       })
+    }
   },[inputStr])
   console.log("hellowrld: " + JSON.stringify(bookArray));
   if(bookArray != null){
