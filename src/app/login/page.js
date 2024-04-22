@@ -90,8 +90,7 @@ export default function Login({children}) {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  console.log("just called");
-  const check = async () => {
+  async function check(){
     console.log("checking");
     const request = await fetch(`/api`, {
       body: JSON.stringify({ password, username }),
