@@ -6,7 +6,7 @@ Steps to run:
 
 3. Run this command: git clone https://github.com/CharlesC234/virtual_library_frontend_v2.git
 
-4. CD into the newly created folder: cd virtual_library_frontend
+4. CD into the newly created folder: cd virtual_library_frontend_v2
 
 5. Run this command to install all required dependencies: npm install
 
