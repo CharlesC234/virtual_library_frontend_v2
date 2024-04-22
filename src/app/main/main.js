@@ -1,5 +1,8 @@
 "use client";
 
+import getBooksForUser from "../components/getBookArray";
+import { useEffect, useState } from "react";
+
 /*
 In order to access the variable fetched from the database if it is a collection type it will be in an array.
 if it is a single type then it will be just a normal variable call appended to the end of the stored value
@@ -7,7 +10,21 @@ as seen there is homeData(name of variable) .data(this is where either the array
 .attributes(this is where each of the fields of the given piece of data are) .nameofattribute(this can be whatever name you want of which attribute)
 */
 
-export default function Main({booksData}) {
+export default function Main({}) {
+    const [bookArr, setBookArr] = useState([]);
+    const username = localStorage.getItem("username");
+
+    useEffect(() => {
+        console.log(username);
+        console.log(bookArr.length);
+        if( bookArr.length <= 0){
+        console.log("called");
+        getBooksForUser("USER").then((res) => {
+            console.log(res);
+            setBookArr(res);
+        })
+        }
+    })
 
     //console.log(booksData.data[2]);
 
@@ -87,7 +104,7 @@ export default function Main({booksData}) {
             <div class="grid grid-cols-3 gap-8 mt-9">
 
             {/* Displaying all the books inside grid */}
-            {booksData.data.map((item) => {
+            {bookArr.map((item) => {
                 return (
                     <div>
 
