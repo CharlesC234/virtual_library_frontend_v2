@@ -4,7 +4,7 @@ import Main from "./main";
 
 export default async function MainPage({}) {
   
-  let newHomeData, newBooksData = null;
+  let newBooksData = null;
 
   async function getStrapiData(path){
     const baseUrl = "https://virtuallibrarybackendstrapi-production.up.railway.app/api/";
@@ -18,16 +18,6 @@ export default async function MainPage({}) {
     }
   }
 
-  async function navigateToPage(){
-    try{
-
-    }
-    catch(error){
-      console.error(error);
-    }
-  }
-
-  //newHomeData = await getStrapiData("home-page");
   newBooksData = await getStrapiData("books?populate[cover][populate]=*");
 
   return (
