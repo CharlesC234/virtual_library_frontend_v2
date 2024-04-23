@@ -102,6 +102,7 @@ export default function Login({children}) {
     if (request.status !== 200){
       setApproved(false);
     }else {
+      if (typeof window !== 'undefined') {
       if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null"){
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
@@ -110,11 +111,11 @@ export default function Login({children}) {
       setApproved(true);
       }
     }
+  }
   };
 
-
+  if (typeof window !== 'undefined') {
   if(!approved){
-
     if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null" || localStorage.getItem("username") == null || localStorage.getItem("password") == null || !localStorage.getItem("password") || !localStorage.getItem("username")){
       return (
 
@@ -209,4 +210,5 @@ export default function Login({children}) {
   }else{
     return <div>{children}</div>
   }
+}
 }

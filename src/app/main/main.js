@@ -12,7 +12,10 @@ as seen there is homeData(name of variable) .data(this is where either the array
 
 export default function Main({}) {
     const [bookArr, setBookArr] = useState([]);
-    const username = localStorage.getItem("username");
+    let username = "";
+    if (typeof window !== 'undefined') {
+    username = localStorage.getItem("username");
+    }
 
     useEffect(() => {
         //console.log(username);
@@ -104,9 +107,9 @@ export default function Main({}) {
             <div class="grid grid-cols-3 gap-8 mt-9">
 
             {/* Displaying all the books inside grid */}
-            {bookArr.map((item) => {
+            {bookArr.map((item, index) => {
                 return (
-                    <div>
+                    <div key={index}>
 
                         {/* Whole card */}
                         <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-700 text-center">

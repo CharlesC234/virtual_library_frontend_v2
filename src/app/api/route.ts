@@ -2,7 +2,7 @@
 // api/route.ts
 import { serialize } from "cookie";
 
-export default async function getCredentials(user){
+async function getCredentials(user){
 
     async function getStrapiData(){
         const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users?populate=*&filters[username][$eq]=${user}`;

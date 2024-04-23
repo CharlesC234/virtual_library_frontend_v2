@@ -17,7 +17,10 @@ export default function Main() {
     const [year, setYear] = useState("");
     const [category, setCategory] = useState("");
     const [isPublic, setIsPublic] = useState(false);
-    const username = localStorage.getItem("username");
+    let username = "";
+    if (typeof window !== 'undefined') {
+    username = localStorage.getItem("username");
+    }
 
     function handleChangeCover(event){
         if (event.target.files && event.target.files[0]) {

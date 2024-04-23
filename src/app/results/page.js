@@ -1,11 +1,11 @@
-"use sever";
+"use client";
 import "../globals.css";
-import Login from "../login/page";
+import Login from "../login/login";
 import Results from "./results";
 
 
 
-export default async function ResultsPage({}) {
+export default function ResultsPage({}) {
   return (
     <div>
         <Login>

@@ -1,9 +1,9 @@
-"use sever";
+"use client";
 import "../globals.css";
 import Books from "./books";
-import Login from "../login/page";
+import Login from "../login/login";
 
-export default async function BooksPage({}) {
+export default function BooksPage({}) {
 
 
   return (

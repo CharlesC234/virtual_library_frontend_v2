@@ -7,7 +7,10 @@ import { useSearchParams } from "next/navigation";
 
 export default function Main() {
     const [bookArr, setBookArr] = useState(null);
-    const username = localStorage.getItem("username");
+    let username = "";
+    if (typeof window !== 'undefined') {
+    username = localStorage.getItem("username");
+    }
     const searchParams = useSearchParams();
     const query = searchParams.get('query')
     const [sortedArray, setSortedArray] = useState([]);
@@ -39,7 +42,7 @@ export default function Main() {
         </thead>
         <tbody>
         {sortedArray.map((item, index) => {
-        return <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        return <tr key={index} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
                     <img class="w-10 h-10 rounded-full" src={item.attributes.cover.data.attributes.url}/>
                     <div class="ps-3">
