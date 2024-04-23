@@ -103,7 +103,8 @@ export default function Login({children}) {
       setApproved(false);
     }else {
       if (typeof window !== 'undefined') {
-      if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null"){
+      if(localStorage.getItem("username") == "null" || localStorage.getItem("password") == "null" || localStorage.getItem("username") == null || localStorage.getItem("password") == null){
+      // console.log("Right Here");
       localStorage.setItem("username", username);
       localStorage.setItem("password", password);
       window.location.reload();
