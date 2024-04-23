@@ -23,10 +23,10 @@ export default function Main() {
         }
     })
 
-    console.log("username: " + username);
-    console.log("bookArr: " + bookArr);
-    console.log("query" + query);
-    console.log("sortedArr: " + sortedArray);
+    //console.log("username: " + username);
+    //console.log("bookArr: " + bookArr);
+    //console.log("query" + query);
+    //console.log("sortedArr: " + sortedArray);
 
     return <div class="container flex mx-auto mt-5 justify-center relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

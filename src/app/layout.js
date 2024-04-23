@@ -37,7 +37,7 @@ async function getStrapiDataEachBook(bookName){
 export default function RootLayout({ children }) {
   const [bookArray, setBookArray] = useState(null);
   const router = useRouter();
-  const [inputStr, setInputStr] = useState("");
+  const [inputStr, setInputStr] = useState(null);
   const [showSearch, setShowSearch] = useState(false);
   const [border, setBorder] = useState(1.5);
   const [radius, setRadius] = useState(20);
@@ -68,9 +68,12 @@ export default function RootLayout({ children }) {
       })
     }
   },[inputStr])
-  console.log("hellowrld: " + JSON.stringify(bookArray));
+  //console.log("hellowrld: " + JSON.stringify(bookArray));
+  
   if(bookArray != null){
-
+    if(sortedArray.length == 0 && bookArray.length != 0){
+      setSortedArray(bookArray);
+    }
 
   return (
     <html lang="en">
@@ -101,7 +104,7 @@ export default function RootLayout({ children }) {
               Sign Out</button>
         </li>
         <li className="w-full">
-<form className="flex flex-row" onSubmit={() => {router.push(`/results?query=${inputStr}`)}}>   
+<div className="flex flex-row">   
     <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative w-full">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -188,8 +191,8 @@ export default function RootLayout({ children }) {
             </div>
           </div>
     </div>
-    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ms-4">Search</button>
-</form>
+    <button onClick={() => {router.push(`/results?query=${inputStr}`)}} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ms-4">Search</button>
+</div>
         </li>
       </ul>
     </div>

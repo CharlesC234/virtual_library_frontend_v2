@@ -25,6 +25,18 @@ async function getStrapiData(user){
     }
   } 
 
+ export async function getStrapiDataEachBookID(bookID){
+    const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/books?populate=*&filters[book_id][$eq]=the-return-of-the-king`;
+    try{
+        const response = await fetch(baseUrl);
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
+  } 
+
 
   export default async function getBooksForUser(user) {
     const res = await getStrapiData(user);

@@ -15,12 +15,12 @@ export default function Main({}) {
     const username = localStorage.getItem("username");
 
     useEffect(() => {
-        console.log(username);
-        console.log(bookArr.length);
+        //console.log(username);
+        //console.log(bookArr.length);
         if( bookArr.length <= 0){
-        console.log("called");
-        getBooksForUser("USER").then((res) => {
-            console.log(res);
+        //console.log("called");
+        getBooksForUser(username).then((res) => {
+            //console.log(res);
             setBookArr(res);
         })
         }

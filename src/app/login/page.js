@@ -91,13 +91,13 @@ export default function Login({children}) {
   const [username, setUsername] = useState("");
 
   async function check(){
-    console.log("checking");
+    //console.log("checking");
     const request = await fetch(`/api`, {
       body: JSON.stringify({ password, username }),
       headers: { "Content-Type": "application/json" },
       method: "POST",
     });
-    console.log(request.status);
+    //console.log(request.status);
   
     if (request.status !== 200){
       setApproved(false);

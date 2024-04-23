@@ -18,24 +18,24 @@ export default async function getCredentials(user){
 
 
     const data = await getStrapiData();
-    console.log("hello " + JSON.stringify(data.data[0].attributes));
+    //console.log("hello " + JSON.stringify(data.data[0].attributes));
     return data.data[0].attributes.password;
 }
 
 
 
 export async function POST(request: Request, params: { slug: string }) {
-console.log("here");
+//console.log("here");
 
 const data: { password: string, username: string } = await request.json();
 const password = data.password;
 const user = data.username;
 
 const decodedString = await getCredentials(user);
-console.log("Decoded String:", decodedString);
+//console.log("Decoded String:", decodedString);
 
-console.log(data);
-console.log(password);
+//console.log(data);
+//console.log(password);
 
 if (decodedString !== password) {
 return new Response("incorrect password", {

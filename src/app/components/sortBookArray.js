@@ -27,7 +27,7 @@
       str.toUpperCase().includes(substr.toUpperCase());
 
     return arr.sort((a, b) => {
-      console.log("a" + JSON.stringify(a));
+      //console.log("a" + JSON.stringify(a));
       const containsA = containsSubstring(
         a.attributes.name.toUpperCase(),
         strvalue.toUpperCase()
