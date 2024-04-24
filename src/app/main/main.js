@@ -36,7 +36,7 @@ export default function Main({}) {
         <section class="text-center text-neutral-600 dark:text-neutral-200">
 
             {/* Main headings */}
-            <h1 class="text-5xl font-bold mb-5">Home Page</h1>
+            <h1 class="text-5xl font-bold mb-5">BookWise</h1>
             <h4 class="text-2xl italic text-neutral-500 dark:text-neutral-400 mb-8">The at-home Virtual Library</h4>
 
             {/* Divider */}
