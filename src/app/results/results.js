@@ -14,10 +14,14 @@ export default function Main() {
     const searchParams = useSearchParams();
     const query = searchParams.get('query')
     const [sortedArray, setSortedArray] = useState([]);
+    const authorFilter = searchParams.get('author');
+    const beforeQuery = searchParams.get('before');
+    const afterQuery = searchParams.get('after');
+    const categoryQuery = searchParams.get('category');
 
     useEffect(() => {
         if(username != null && username != "null" && bookArr == null){
-        getBooksForUser(username).then((res) => {
+        getBooksForUser(username, authorFilter, beforeQuery, afterQuery, categoryQuery).then((res) => {
             setBookArr(res);
             sortByLevenshteinDistance(res, query).then((res2) => {
                 setSortedArray(res2);
@@ -26,12 +30,7 @@ export default function Main() {
         }
     })
 
-    //console.log("username: " + username);
-    //console.log("bookArr: " + bookArr);
-    //console.log("query" + query);
-    //console.log("sortedArr: " + sortedArray);
-
-    return <div class="container flex mx-auto mt-5 justify-center relative overflow-x-auto shadow-md sm:rounded-lg">
+    return <div class="container flex mx-auto mt-10 justify-center relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -43,18 +42,30 @@ export default function Main() {
         <tbody>
         {sortedArray.map((item, index) => {
         return <tr key={index} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+                <th scope="row" class="flex text-gray-900 whitespace-nowrap dark:text-white">
+                <a class="flex items-center w-full" href={item.attributes.book_id}>
+                    <div className="items-center px-6 py-4 flex flex-row">
                     <img class="w-10 h-10 rounded-full" src={item.attributes.cover.data.attributes.url}/>
                     <div class="ps-3">
                         <div class="text-base font-semibold">{item.attributes.name}</div>
                     </div>  
+                    </div>
+                    </a>
                 </th>
-                <td class="px-6 py-4">
+                <td>
+                <a className="p-0 w-full h-full" href={item.attributes.book_id}>
+                    <div className="px-6 py-4">
                     {item.attributes.author}
+                    </div>
+                    </a>
                 </td>
-                <td class="px-6 py-4">
+                <td>
+                <a href={item.attributes.book_id}>
+                    <div className="px-6 py-4">
                     <div class="flex items-center"> {item.attributes.isbn}
                     </div>
+                    </div>
+                    </a>
                 </td>
             </tr>
         })}

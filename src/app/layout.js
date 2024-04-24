@@ -41,9 +41,42 @@ export default function RootLayout({ children }) {
   const [showSearch, setShowSearch] = useState(false);
   const [border, setBorder] = useState(1.5);
   const [radius, setRadius] = useState(20);
-  const [hidden, setHidden] = useState(true);
   const [dropdown, setdropdown] = useState(false);
+  const [dropdown2, setdropdown2] = useState(false);
   const [sortedArray, setSortedArray] = useState([]);
+  const [author, setAuthor] = useState(null);
+  const [before, setBefore] = useState(null);
+  const [after, setAfter] = useState(null);
+  const [category, setCategory] = useState(null);
+  const categories = [
+    "Fantasy",
+    "Science Fiction",
+    "Mystery",
+    "Thriller",
+    "Romance",
+    "Historical Fiction",
+    "Horror",
+    "Young Adult",
+    "Non-fiction",
+    "Biography/Memoir"
+  ];
+
+  function query(){
+    let path = `/results?query=${inputStr}`;
+    if(author != null){
+      path = path + `&author=${author}`;
+    }
+    if(before != null){
+      path = path + `&before=${before}`;
+    }
+    if(after != null){
+      path = path + `&after=${after}`;
+    }
+    if(category != null){
+      path = path + `&category=${category}`;
+    }
+    router.push(path);
+  }
 
   const getBooksForUser= async(user) => {
     await getStrapiData(user).then((res) => {
@@ -81,6 +114,7 @@ export default function RootLayout({ children }) {
       <nav class="bg-white border-gray-200 dark:bg-gray-900">
   <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <img class="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/475352/book.svg" alt="Your Company"/>
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BookWise</span>
     </a>
     <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
@@ -142,7 +176,7 @@ export default function RootLayout({ children }) {
                 borderBottomLeftRadius: radius,
                 width: "100%",
               }}
-              type="search" id="search" class="block w-full h-5 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" />
+              type="search" id="search" class="block w-full h-5 p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search by title" />
             <button
               onClick={() => {
                 setShowSearch(false);
@@ -197,7 +231,81 @@ export default function RootLayout({ children }) {
             </div>
           </div>
     </div>
-    <button onClick={() => {router.push(`/results?query=${inputStr}`)}} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ms-4">Search</button>
+    <button onClick={() => {setdropdown(!dropdown)}} id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="ms-4 my-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 rounded-3xl" type="button">
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" style={{fill: "#FFFFFF"}}>
+<path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"></path>
+</svg>
+</button>
+    <button onClick={() => {query()}} type="button" class="ms-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 py-0">Search</button>
+</div>
+<div id="dropdown" style={{width: '40%', right: '10%'}}class={`z-10 mt-7 absolute ${dropdown ? "visible" : "hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-900`}>
+    <ul class="py-2 flex flex-row text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+      <li>
+        <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Author</div>
+        <div class="p-3">
+      <label for="input-group-search" class="sr-only">Search</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+        </div>
+        <input onChange={(e) => {
+                setAuthor(e.target.value);
+              }}  id="input-group-search" class="block w-full p-2 ps-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Author"/>
+      </div>
+      </div>
+      </li>
+      <li>
+        <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">Before Year</div>
+        <div class="p-3">
+      <label for="input-group-search" class="sr-only">Search</label>
+      <div class="relative">
+      <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+        </div>
+        <input onChange={(e) => {
+                setBefore(e.target.value);
+              }}  maxLength="4" minLength="3" type="text" id="input-group-search" class="block w-full p-2 ps-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="xxxx"/>
+      </div>
+      </div>
+      </li>
+      <li>
+        <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600">After Year</div>
+        <div class="p-3">
+      <label for="input-group-search" class="sr-only">Search</label>
+      <div class="relative">
+      <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+        </div>
+        <input onChange={(e) => {
+                setAfter(e.target.value);
+              }}  maxLength="4" minLength="3" type="text" id="input-group-search" class="block w-full p-2 ps-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="xxxx"/>
+      </div>
+      </div>
+      </li>
+      <li>
+        <div class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Category</div>
+        <div class="p-3">
+
+
+<button onClick={() => {setdropdown2(!dropdown2)}} id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="bottom" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Select <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+</svg>
+</button>
+
+<div id="dropdownRadioHelper" class={`z-10 ${dropdown2 ? "visible" : "hidden"} absolute mt-7 bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:bg-gray-900`}>
+    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
+      {categories.map((item, index) => {
+        return <li key={index}> 
+        <div class="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+          <input onChange={() => {setCategory(item)}} id="helper-radio-4" name="helper-radio" type="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+          <label for="checkbox-item-11" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{item}</label>
+        </div>
+      </li>
+      })}
+    </ul>
+</div>
+
+
+      </div>
+      </li>
+    </ul>
 </div>
         </li>
       </ul>
