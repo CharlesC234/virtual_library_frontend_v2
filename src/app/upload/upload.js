@@ -135,7 +135,6 @@ export default function Main() {
                   })
                 }
               );
-              router.push("/");
           }))
             
             
@@ -272,7 +271,7 @@ onClick={() => {
         || uploadedBook == null || uploadedCover == null){
             setFieldsIncomplete(true);
         }else{
-Post(username);}}} >Submit</button>
+Post(username);router.push("/");}}} >Submit</button>
     </div>
     </div>
     </div>

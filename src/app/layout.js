@@ -8,6 +8,7 @@ import Router from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 import sortByLevenshteinDistance from "./components/sortBookArray";
 import { getPublicBooks } from "./components/getBookArray";
+import { usePathname } from 'next/navigation'
 
 async function getStrapiData(user){
   const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users?populate=*&filters[username][$eq]=${user}`;
@@ -36,6 +37,7 @@ async function getStrapiDataEachBook(bookName){
 
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname().slice(1);
   const [bookArray, setBookArray] = useState(null);
   const router = useRouter();
   const [inputStr, setInputStr] = useState(null);
@@ -154,7 +156,7 @@ export default function RootLayout({ children }) {
           <a href="/" class="my-auto inline-block align-middle px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
         </li>
         <li className="my-auto">
-          <a href="/upload" class="my-auto inline-block align-middle px-3 text-gray-900 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Upload</a>
+          <a href="/upload" class={`my-auto inline-block align-middle px-3 text-gray-900 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white`} aria-current="page">Upload</a>
         </li>
         <li className="my-auto">
           <button style={{width: 75}} onClick={() => {
