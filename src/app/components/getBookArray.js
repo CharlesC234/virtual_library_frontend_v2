@@ -55,6 +55,20 @@ async function getStrapiData(user, author, before, after, category){
     }
   } 
 
+  export const deleteBook = async (bookID) => {
+      try {
+        const response = await fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/books/${bookID}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+      } 
+      catch (error) {
+        console.error(error);
+      } 
+  };
+  
   export default async function getBooksForUser(user, author, before, after, category) {
     const res = await getStrapiData(user, author, before, after, category);
   

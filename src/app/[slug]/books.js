@@ -2,10 +2,17 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from "react";
 import { getStrapiDataEachBookwID } from "../components/getBookArray";
+import { deleteBook } from "../components/getBookArray";
+import { useRouter } from "next/navigation";
 
 export default function Books() {
     const [bookArr, setBookArr] = useState(null); // Initialize with null
     const pathname = usePathname().slice(1);
+    const router = useRouter();
+    let username = "";
+    if (typeof window !== 'undefined') {
+    username = localStorage.getItem("username");
+    }
 
     useEffect(() => {
         if(!bookArr){ // Check if bookArr is falsy
@@ -21,6 +28,7 @@ export default function Books() {
         return <main></main>
     }
     else{
+        // console.log(username)
     return <main>
         <div class="container my-24 mx-auto md:px-6">
             
@@ -64,7 +72,7 @@ export default function Books() {
                                     class="inline-flex bg-blue-500 rounded-md shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-1 dark:focus:shadow-dark-1 dark:active:shadow-dark-1"
                                     role="group">
                                     
-                                    {/* Link for functionality */}
+                                    {/* Read book button */}
                                     <a target="_blank" href={bookArr.data[0].attributes.pdf.data.attributes.url} rel="noopener noreferrer">
                                         <button
                                             type="button"
@@ -75,7 +83,7 @@ export default function Books() {
                                         </button>
                                     </a>
 
-                                    {/* Extra button that fits in middle */}
+                                    {/* Edit book button */}
                                     <button
                                         type="button"
                                         class="inline-block bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
@@ -84,16 +92,16 @@ export default function Books() {
                                         Edit
                                     </button>
 
-                                    {/* Link for functionality */}
-                                    <a href="">
-                                        <button
-                                            type="button"
-                                            class="inline-block rounded-e bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
-                                            data-twe-ripple-init
-                                            data-twe-ripple-color="light">
-                                            Delete
-                                        </button>
-                                    </a>
+                                    {/* Delete book button */}
+                                    <button
+                                        type="button"
+                                        class="inline-block rounded-e bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
+                                        data-twe-ripple-init
+                                        data-twe-ripple-color="light"
+                                        onClick={() => bookArr.data[0].attributes.user_id == username ? window.confirm("Are you sure you would like to delete this book?") ? deleteBook(bookArr.data[0].id) ? router.push("/") : console.log("Failed to delete book") : console.log("User decided not to delete book") : window.alert("You do not own this book.")}
+                                        >
+                                        Delete
+                                    </button>
                                 </div>
 
                             </div>
