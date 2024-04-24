@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import getBooksForUser from "../components/getBookArray";
 import sortByLevenshteinDistance from "../components/sortBookArray";
-import { useSearchParams } from "next/navigation";
-import { Post } from "../components/post";
+import { useRouter, useSearchParams } from "next/navigation";
+
+
 
 export default function Main() {
     const [uploadedCover, setUploadedCover] = useState(null);
@@ -17,6 +18,8 @@ export default function Main() {
     const [year, setYear] = useState("");
     const [category, setCategory] = useState("");
     const [isPublic, setIsPublic] = useState(false);
+    const router = useRouter();
+
     let username = "";
     if (typeof window !== 'undefined') {
     username = localStorage.getItem("username");
@@ -37,10 +40,103 @@ export default function Main() {
       };
 
 
+
+      function Post(username) {
+        // console.log(uploadedBook);
+        // console.log(uploadedCover);
+        try {
+          fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/books/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              data: {
+                name: bookName,
+                author: author,
+                isbn: isbn,
+                description: description,
+                public: isPublic,
+                publication_year: year,
+                category: category,
+                publisher: publisher,
+                user_id: username,
+              },
+            }),
+          }).then((res) => {
+            res.json().then((response) => {
+                const formData1 = new FormData();
+                // Create a FormData object to send the image data
+                fetch(uploadedCover.url)
+                .then(res2 => res2.blob())
+                .then(blob => {
+                formData1.append('files', uploadedCover.file, uploadedCover.name)
+                // Upload
+                formData1.append('ref', 'api::book.book');
+                formData1.append('refId', response.data.id);
+                formData1.append('field', 'cover');
+    
+                // Make a POST request using fetch
+                fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/upload`, {
+                  method: 'POST',
+                  body: formData1,
+              })
+    
+               // Create a FormData object to send the image data
+               const formData2 = new FormData();
+               fetch(uploadedBook.url)
+               .then(res3 => res3.blob())
+               .then(blob => {
+               formData2.append('files', uploadedBook.file, uploadedBook.name)
+               // Upload
+               formData2.append('ref', 'api::book.book');
+               formData2.append('refId', response.data.id);
+               formData2.append('field', 'pdf');
+    
+               // Make a POST request using fetch
+               fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/upload`, {
+                 method: 'POST',
+                 body: formData2,
+             })
+            });
+          });
+
+
+          fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users?populate=*&filters[username][$eq]=${username}`)
+          .then((res1) => res1.json().then((resUser) =>{
+            console.log("data: " + resUser.data[0].id)
+            console.log(response.data.id);
+            fetch(
+                `https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users/${resUser.data[0].id}`,
+                {
+                  method: 'PUT',
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    data: {
+                      books: {
+                        connect: [{id: response.data.id, position: { end: true }}]}
+                    }
+                  })
+                }
+              );
+              router.push("/");
+          }))
+            
+            
+          })})} catch (error) {
+          console.error(error);
+          return null;
+        }
+      }
+
+
+
     return <div>
 
-
 <div class="max-w-md mx-auto mt-5">
+<h5 className="text-3xl font-bold mb-5 mt-10">Upload A Book</h5>
   <div class="relative z-0 w-full mb-5 group">
       <input onChange={(e) => {
                 setBookName(e.target.value);
@@ -100,13 +196,19 @@ export default function Main() {
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
         </div>
-        <input onChange={handleChangeCover} id="dropzone-file" type="file" multiple class="hidden" />
+        <input onChange={handleChangeCover} id="dropzone-file" type="file" class="hidden" />
     </label>
     : 
     <div class="flex items-center justify-center mt-3 aspect-square" style={{borderRadius: 20, height: 200}}>
     <img style={{borderRadius: 20}} className="aspect-square" src={uploadedCover.url}></img>
+    <button className="ms-5" onClick={() => {setUploadedCover(null)}}>
+     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 48 48">
+<path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)"></path><path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)"></path>
+</svg>
+    </button>
     </div>}
 
+    {uploadedBook == null ?
     <label style={{backgroundColor: 'rgba(31, 41, 55, .75)', borderRadius: 20, height: 200}} for="dropzone-file" class="flex flex-col mt-5 items-center justify-center w-full border-2 border-gray-400 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-900 hover:bg-gray-100 dark:hover:border-gray-500 dark:hover:bg-gray-600 aspect-square">
         <div class="flex flex-col items-center justify-center pt-5 pb-6">
         <p class="text-xl mb-3 font-bold text-gray-500 dark:text-gray-400">Upload Book PDF</p>
@@ -116,8 +218,17 @@ export default function Main() {
             <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click</span> or drag and drop</p>
             <p class="text-xs text-gray-500 dark:text-gray-400">PDF</p>
         </div>
-        <input onChange={handleChangeBook} id="dropzone-file" type="file" multiple class="hidden" />
-    </label>
+        <input onChange={handleChangeBook} id="dropzone-file" type="file" class="hidden" />
+    </label> :
+     <div class="flex items-center justify-center mt-3 aspect-square" style={{borderRadius: 20, height: 200}}>
+     <p>{uploadedBook.name}</p>
+     <button className="ms-5"  onClick={() => {setUploadedBook(null)}}>
+     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 48 48">
+<path fill="#F44336" d="M21.5 4.5H26.501V43.5H21.5z" transform="rotate(45.001 24 24)"></path><path fill="#F44336" d="M21.5 4.5H26.5V43.501H21.5z" transform="rotate(135.008 24 24)"></path>
+</svg>
+    </button>
+     </div>}
+
 </div>
 <div className="flex flex-col">
 <label class="inline-flex items-center mb-5 cursor-pointer ms-0 mt-4">
@@ -125,11 +236,11 @@ export default function Main() {
   <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
   <span class="ms-3 font-bold text-gray-900 dark:text-gray-300">Make This Book Public</span>
 </label>
-<button className="text-white bg-blue-700 font-medium rounded-lg font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center"
+<button className="mt-5 text-white bg-blue-700 font-medium rounded-lg font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center mb-20"
 onClick={() => {
     console.log(uploadedBook);
     console.log(uploadedCover);
-Post(username, bookName, author, description, isbn, publisher, year, category, uploadedCover.name, uploadedCover.url.substring(5), uploadedBook.name, uploadedBook.url.substring(5), isPublic);}} >Submit</button>
+Post(username);}} >Submit</button>
     </div>
     </div>
     </div>

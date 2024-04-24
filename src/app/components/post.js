@@ -1,9 +1,7 @@
 "use server";
-export async function Post(username, bookName, author, description, isbn, publisher, year, category, uploadedCoverName, uploadedCoverUrl, uploadedBookName, uploadedBookUrl, isPublic) {
-    console.log(uploadedCoverName);
-    console.log(uploadedCoverUrl);
-    console.log(uploadedBookName);
-    console.log(uploadedBookUrl);
+export async function Post(username, bookName, author, description, isbn, publisher, year, category, uploadedCover, uploadedBook, isPublic) {
+    console.log(uploadedBook);
+    console.log(uploadedCover);
     try {
       const formData = new FormData();
       fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/books/`, {
@@ -27,10 +25,10 @@ export async function Post(username, bookName, author, description, isbn, publis
       }).then((res) => {
         res.json().then((response) => {
             // Create a FormData object to send the image data
-            fetch(uploadedCoverUrl)
+            fetch(uploadedCover.url)
             .then(res2 => res2.blob())
             .then(blob => {
-            formData.append('files', blob, uploadedCoverName)
+            formData.append('files', coverFile, uploadedCover.name)
             // Upload
             formData.append('ref', 'api::book.book');
             formData.append('refId', response.data.id);
@@ -40,28 +38,27 @@ export async function Post(username, bookName, author, description, isbn, publis
             fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/upload`, {
               method: 'POST',
               body: formData,
-          }).then(() => {
-                       // Create a FormData object to send the image data
-                       fetch(uploadedBookUrl)
-                       .then(res3 => res3.blob())
-                       .then(blob => {
-                       formData.append('files', blob, uploadedBookName)
-                       // Upload
-                       formData.append('ref', 'api::book.book');
-                       formData.append('refId', response.data.id);
-                       formData.append('field', 'pdf');
-           
-                       // Make a POST request using fetch
-                       fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/upload`, {
-                         method: 'POST',
-                         body: formData,
-                     })
-           }); 
-            })
+          })
+
+           // Create a FormData object to send the image data
+           fetch(uploadedBook.url)
+           .then(res3 => res3.blob())
+           .then(blob => {
+           formData.append('files', bookFile, uploadedBook.name)
+           // Upload
+           formData.append('ref', 'api::book.book');
+           formData.append('refId', response.data.id);
+           formData.append('field', 'pdf');
+
+           // Make a POST request using fetch
+           fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/upload`, {
+             method: 'POST',
+             body: formData,
+         })
         });
       });
         
-      })} catch (error) {
+      })})} catch (error) {
       console.error(error);
       return null;
     }
