@@ -65,7 +65,7 @@ export default function Books() {
                                     role="group">
                                     
                                     {/* Link for functionality */}
-                                    <a href={bookArr.data[0].attributes.pdf.data.attributes.url}>
+                                    <a target="_blank" href={bookArr.data[0].attributes.pdf.data.attributes.url} rel="noopener noreferrer">
                                         <button
                                             type="button"
                                             class="inline-block rounded-s bg-primary-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
