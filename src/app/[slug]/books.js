@@ -46,11 +46,11 @@ export default function Books() {
                                 </p>
                                 
                                 <p class="mb-6 text-neutral-500 dark:text-neutral-300">
-                                Written by: {bookArr.data[0].attributes.author}, {bookArr.data[0].attributes.publication_year}
+                                Written by: {bookArr.data[0].attributes.author}
                                 </p>
 
                                 <p class="mb-6 text-neutral-500 dark:text-neutral-300">
-                                Published by: {bookArr.data[0].attributes.publisher}
+                                Published by: {bookArr.data[0].attributes.publisher}, {bookArr.data[0].attributes.publication_year}
                                 </p>
 
                                 <p class="mb-6 text-neutral-500 dark:text-neutral-300">
