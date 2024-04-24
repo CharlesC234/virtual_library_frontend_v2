@@ -69,14 +69,14 @@ export default function Books() {
                                 
                                 {/* Button row */}
                                 <div
-                                    class="inline-flex bg-blue-500 rounded-md shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-1 dark:focus:shadow-dark-1 dark:active:shadow-dark-1"
+                                    class="inline-flex shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-1 dark:focus:shadow-dark-1 dark:active:shadow-dark-1"
                                     role="group">
                                     
                                     {/* Read book button */}
                                     <a target="_blank" href={bookArr.data[0].attributes.pdf.data.attributes.url} rel="noopener noreferrer">
                                         <button
                                             type="button"
-                                            class="inline-block rounded-s bg-primary-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
+                                            class="inline-block bg-blue-500 mx-2 rounded bg-primary-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
                                             data-twe-ripple-init
                                             data-twe-ripple-color="light">
                                             Read
@@ -84,25 +84,28 @@ export default function Books() {
                                     </a>
 
                                     {/* Edit book button */}
+                                    {bookArr.data[0].attributes.user_id == username ? 
                                     <button
                                         onClick={() => {router.push(`/edit?id=${bookArr.data[0].id}`)}}
                                         type="button"
-                                        class="inline-block bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
+                                        class="inline-block bg-blue-500 mx-2 rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
                                         data-twe-ripple-init
                                         data-twe-ripple-color="light">
                                         Edit
-                                    </button>
+                                    </button>: <></>}
 
                                     {/* Delete book button */}
-                                    <button
-                                        type="button"
-                                        class="inline-block rounded-e bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
-                                        data-twe-ripple-init
-                                        data-twe-ripple-color="light"
-                                        onClick={() => bookArr.data[0].attributes.user_id == username ? window.confirm("Are you sure you would like to delete this book?") ? deleteBook(bookArr.data[0].id) ? router.push("/") : console.log("Failed to delete book") : console.log("User decided not to delete book") : window.alert("You do not own this book.")}
-                                        >
-                                        Delete
-                                    </button>
+                                    {bookArr.data[0].attributes.user_id == username ? 
+                                                                        <button
+                                                                        type="button"
+                                                                        class="inline-block bg-blue-500 mx-2 rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
+                                                                        data-twe-ripple-init
+                                                                        data-twe-ripple-color="light"
+                                                                        onClick={() => bookArr.data[0].attributes.user_id == username ? window.confirm("Are you sure you would like to delete this book?") ? deleteBook(bookArr.data[0].id) ? router.push("/") : console.log("Failed to delete book") : console.log("User decided not to delete book") : window.alert("You do not own this book.")}
+                                                                        >
+                                                                        Delete
+                                                                    </button> : <></>
+                                    }
                                 </div>
 
                             </div>

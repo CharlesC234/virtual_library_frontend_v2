@@ -29,10 +29,14 @@ export default function Main() {
                 sortByLevenshteinDistance(combinedArray, query).then((res3) => {
                     const temp = [res3[0]];
                     for(let i = 1; i < res3.length; i++){
+                        if(res3[i] == undefined){
+                            temp.push(res3[i-1]);
+                        }else{
                         if(res3[i].attributes.name != res3[i - 1].attributes.name){
                             temp.push(res3[i]);
                
                         }
+                    }
                     }
                     setSortedArray(temp);
                   })
