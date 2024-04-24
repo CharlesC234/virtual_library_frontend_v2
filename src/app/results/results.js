@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import getBooksForUser from "../components/getBookArray";
 import sortByLevenshteinDistance from "../components/sortBookArray";
 import { useSearchParams } from "next/navigation";
+import { getPublicBooks } from "../components/getBookArray";
 
 export default function Main() {
     const [bookArr, setBookArr] = useState(null);
@@ -22,13 +23,27 @@ export default function Main() {
     useEffect(() => {
         if(username != null && username != "null" && bookArr == null){
         getBooksForUser(username, authorFilter, beforeQuery, afterQuery, categoryQuery).then((res) => {
-            setBookArr(res);
-            sortByLevenshteinDistance(res, query).then((res2) => {
-                setSortedArray(res2);
-              })
+            getPublicBooks(authorFilter, beforeQuery, afterQuery, categoryQuery).then((res2) => {
+                const combinedArray = Array.from(new Set([...res, ...res2]));
+                setBookArr(combinedArray);
+                sortByLevenshteinDistance(combinedArray, query).then((res3) => {
+                    const temp = [res3[0]];
+                    for(let i = 1; i < res3.length; i++){
+                        if(res3[i].attributes.name != res3[i - 1].attributes.name){
+                            temp.push(res3[i]);
+               
+                        }
+                    }
+                    setSortedArray(temp);
+                  })
+            })
         })
         }
     })
+
+    if(sortedArray[0] == undefined){
+        return <div class="container flex mt-10 mx-auto justify-center"><h1 className="font-bold text-2xl justify-center">No Results</h1></div>
+    }else{
 
     return <div class="container flex mx-auto mt-10 justify-center relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -72,6 +87,6 @@ export default function Main() {
         </tbody>
     </table>
 </div>
-
+    }
 
 }

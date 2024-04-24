@@ -10,15 +10,29 @@ import { useRouter, useSearchParams } from "next/navigation";
 export default function Main() {
     const [uploadedCover, setUploadedCover] = useState(null);
     const [uploadedBook, setUploadedBook] = useState(null);
-    const [bookName, setBookName] = useState("");
-    const [author, setAuthor] = useState("");
-    const [description, setDescription] = useState("");
-    const [isbn, setIsbn] = useState("");
-    const [publisher, setPublisher] = useState("");
-    const [year, setYear] = useState("");
-    const [category, setCategory] = useState("");
+    const [bookName, setBookName] = useState(null);
+    const [author, setAuthor] = useState(null);
+    const [description, setDescription] = useState(null);
+    const [isbn, setIsbn] = useState(null);
+    const [publisher, setPublisher] = useState(null);
+    const [year, setYear] = useState(null);
+    const [category, setCategory] = useState(null);
     const [isPublic, setIsPublic] = useState(false);
     const router = useRouter();
+    const [fieldsIncomplete, setFieldsIncomplete] = useState(false);
+    const [dropdown2, setdropdown2] = useState(false);
+    const categories = [
+      "fantasy",
+      "science fiction",
+      "mystery",
+      "thriller",
+      "romance",
+      "historical fiction",
+      "horror",
+      "young adult",
+      "non-fiction",
+      "biography/memoir"
+    ];
 
     let username = "";
     if (typeof window !== 'undefined') {
@@ -28,14 +42,14 @@ export default function Main() {
     function handleChangeCover(event){
         if (event.target.files && event.target.files[0]) {
             setUploadedCover({name: event.target.files[0].name, url: URL.createObjectURL(event.target.files[0]), file: event.target.files[0]});
-          console.log(uploadedCover);
+          //console.log(uploadedCover);
         }
       };
 
       function handleChangeBook(event){
         if (event.target.files && event.target.files[0]) {
             setUploadedBook({name: event.target.files[0].name, url: URL.createObjectURL(event.target.files[0]), file: event.target.files[0]});
-          console.log(uploadedBook);
+          //console.log(uploadedBook);
         }
       };
 
@@ -104,8 +118,8 @@ export default function Main() {
 
           fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users?populate=*&filters[username][$eq]=${username}`)
           .then((res1) => res1.json().then((resUser) =>{
-            console.log("data: " + resUser.data[0].id)
-            console.log(response.data.id);
+            //console.log("data: " + resUser.data[0].id)
+            //console.log(response.data.id);
             fetch(
                 `https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users/${resUser.data[0].id}`,
                 {
@@ -177,11 +191,24 @@ export default function Main() {
         <label for="floating_phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Year Published</label>
     </div>
     <div class="relative z-0 w-full mb-5 group">
-        <input onChange={(e) => {
-                setCategory(e.target.value);
-              }} type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
-        <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Category</label>
-    </div>
+    <button onClick={() => {setdropdown2(!dropdown2)}} id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="bottom" class=" mt-1 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">Select Category <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+</svg>
+</button>
+
+<div id="dropdownRadioHelper" class={`z-10 ${dropdown2 ? "visible" : "hidden"} absolute mt-7 bg-white divide-y divide-gray-100 rounded-lg shadow w-60 dark:bg-gray-700 dark:bg-gray-900`}>
+    <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
+      {categories.map((item, index) => {
+        return <li key={index}> 
+        <div class="flex items-center ps-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+          <input onClick={() => {setCategory(item)}} id="helper-radio-4" name="helper-radio" type="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"/>
+          <label for="checkbox-item-11" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">{item}</label>
+        </div>
+      </li>
+      })}
+    </ul>
+</div>
+        </div>
   </div>
 
 
@@ -236,11 +263,16 @@ export default function Main() {
   <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
   <span class="ms-3 font-bold text-gray-900 dark:text-gray-300">Make This Book Public</span>
 </label>
+<p className={`font-bold text-rose-600 ${fieldsIncomplete ? "visible" : "hidden"}`}>Please Fill Out All Fields!</p>
 <button className="mt-5 text-white bg-blue-700 font-medium rounded-lg font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center mb-20"
 onClick={() => {
-    console.log(uploadedBook);
-    console.log(uploadedCover);
-Post(username);}} >Submit</button>
+    //(uploadedBook);
+    //console.log(uploadedCover);
+    if(bookName == null || author == null || description == null || isbn == null || publisher == null || year == null || category == null 
+        || uploadedBook == null || uploadedCover == null){
+            setFieldsIncomplete(true);
+        }else{
+Post(username);}}} >Submit</button>
     </div>
     </div>
     </div>

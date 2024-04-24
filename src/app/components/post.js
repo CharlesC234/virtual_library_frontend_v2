@@ -1,7 +1,7 @@
 "use server";
 export async function Post(username, bookName, author, description, isbn, publisher, year, category, uploadedCover, uploadedBook, isPublic) {
-    console.log(uploadedBook);
-    console.log(uploadedCover);
+    //console.log(uploadedBook);
+    //console.log(uploadedCover);
     try {
       const formData = new FormData();
       fetch(`https://virtuallibrarybackendstrapi-production.up.railway.app/api/books/`, {

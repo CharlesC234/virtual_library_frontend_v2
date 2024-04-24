@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Router from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 import sortByLevenshteinDistance from "./components/sortBookArray";
+import { getPublicBooks } from "./components/getBookArray";
 
 async function getStrapiData(user){
   const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/library-users?populate=*&filters[username][$eq]=${user}`;
@@ -49,16 +50,16 @@ export default function RootLayout({ children }) {
   const [after, setAfter] = useState(null);
   const [category, setCategory] = useState(null);
   const categories = [
-    "Fantasy",
-    "Science Fiction",
-    "Mystery",
-    "Thriller",
-    "Romance",
-    "Historical Fiction",
-    "Horror",
-    "Young Adult",
-    "Non-fiction",
-    "Biography/Memoir"
+    "fantasy",
+    "science fiction",
+    "mystery",
+    "thriller",
+    "romance",
+    "historical fiction",
+    "horror",
+    "young adult",
+    "non-fiction",
+    "biography/memoir"
   ];
 
   function query(){
@@ -86,7 +87,20 @@ export default function RootLayout({ children }) {
           tempArr.push(res2.data[0]);
         })
       }
-      setBookArray(tempArr);
+      getPublicBooks().then((res2) => {
+        const combinedArray = Array.from(new Set([...tempArr, ...res2]));
+        setBookArray(combinedArray);
+        sortByLevenshteinDistance(combinedArray, "A").then((res) => {
+          const temp = [res[0]];
+          for(let i = 1; i < res.length; i++){
+              if(res[i].attributes.name != res[i - 1].attributes.name){
+                  temp.push(res[i]);
+     
+              }
+          }
+          setSortedArray(temp);
+        })
+    })
     })
   }
 
@@ -97,10 +111,21 @@ export default function RootLayout({ children }) {
       }
       if(bookArray != null && bookArray.length > 0){
       sortByLevenshteinDistance(bookArray, inputStr).then((res) => {
-        setSortedArray(res);
+        const temp = [res[0]];
+        for(let i = 1; i < res.length; i++){
+            if(res[i].attributes.name != res[i - 1].attributes.name){
+                temp.push(res[i]);
+   
+            }
+        }
+        setSortedArray(temp);
       })
     }
   },[inputStr])
+
+
+
+  
   //console.log("hellowrld: " + JSON.stringify(bookArray));
   
   if(bookArray != null){
@@ -201,7 +226,7 @@ export default function RootLayout({ children }) {
               }}
             >
               {sortedArray.slice(0, 4).map((item, index) => {
-                console.log(item);
+                //console.log(item);
                 return (
                   <a
                     key={index}

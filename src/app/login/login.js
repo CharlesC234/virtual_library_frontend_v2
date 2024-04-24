@@ -89,6 +89,7 @@ export default function Login({children}) {
   const [approved, setApproved] = useState(false);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   async function check(){
     //console.log("checking");
@@ -100,6 +101,7 @@ export default function Login({children}) {
     //console.log(request.status);
   
     if (request.status !== 200){
+      setInvalid(true);
       setApproved(false);
     }else {
       if (typeof window !== 'undefined') {
@@ -172,9 +174,6 @@ export default function Login({children}) {
       <div>
         <div class="flex items-center justify-between">
           <label for="password" class="block text-sm font-medium leading-6 text-gray-300">Password</label>
-          <div class="text-sm">
-            <a href="/" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-          </div>
         </div>
         <div class="mt-2">
           <input onChange={(e) => setPassword(e.target.value)} value={password} id="password" name="password" type="password" autocomplete="current-password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
@@ -192,12 +191,13 @@ export default function Login({children}) {
               {" "}
               Submit{" "}
             </button>
+            <p className={`font-bold text-rose-600 mb-2 mt-5 ${invalid ? "visible" : "hidden"}`}>Invalid Credentials!</p>
       </div>
     </div>
 
     <p class="mt-10 text-center text-sm text-gray-500">
       Don't have an account?
-      <a href="#" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Create One Here</a>
+      <a href="/create" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"> Create One Here</a>
     </p>
   </div>
 </div>

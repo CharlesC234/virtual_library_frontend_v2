@@ -85,6 +85,7 @@ export default function Books() {
 
                                     {/* Edit book button */}
                                     <button
+                                        onClick={() => {router.push(`/edit?id=${bookArr.data[0].id}`)}}
                                         type="button"
                                         class="inline-block bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"
                                         data-twe-ripple-init
