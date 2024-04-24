@@ -98,6 +98,9 @@ export default function Main({}) {
 
             </div>
 
+            {/* Divider */}
+            <hr class="h-[2px] bg-gray-100 dark:bg-gray-600 my-10 border-none" />
+
             <h3 class="text-3xl font-bold mb-4 mt-10">Public books</h3>
 
 {/* Grid */}
