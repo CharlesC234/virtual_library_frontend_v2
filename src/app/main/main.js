@@ -51,7 +51,7 @@ export default function Main({}) {
                         <div class="mb-12 md:mb-0">
                             <div class="mb-6 inline-block rounded-md bg-primary-100 p-4 text-primary">
                             {/* Link to specific feature */}
-                            <a href="">
+                            <a href="/upload">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 512 512" stroke-width="2"
                                     stroke="currentColor" class="w-[50px] h-[50px] fill-[#ffffff]">
                                     <path stroke-linecap="round" stroke-linejoin="round"

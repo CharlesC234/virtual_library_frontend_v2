@@ -95,6 +95,9 @@ export default function RootLayout({ children }) {
           <a href="/" class="my-auto inline-block align-middle px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
         </li>
         <li className="my-auto">
+          <a href="/upload" class="my-auto inline-block align-middle px-3 text-gray-900 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Upload</a>
+        </li>
+        <li className="my-auto">
           <button style={{width: 75}} onClick={() => {
             if (typeof window !== 'undefined') {
                                         localStorage.setItem("username", null);
@@ -164,12 +167,13 @@ export default function RootLayout({ children }) {
               }}
             >
               {sortedArray.slice(0, 4).map((item, index) => {
+                console.log(item);
                 return (
                   <a
                     key={index}
                     className="flex flex-row justify-start mb-3 px-3 pe-0"
                     style={{ width: "100%" }}
-                    href={"/" + item.display_name}
+                    href={"/" + item.attributes.book_id}
                   >
                     <div style={{ width: "18%", maxWidth: 85, minWidth: 65 }}>
                       <img
