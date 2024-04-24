@@ -23,6 +23,19 @@ async function getStrapiData(user){
     catch(error){
         console.error(error);
     }
+  }
+  
+  export async function getStrapiDataEachBookwID(bookID){
+    const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/books?populate=*&filters[book_id][$eq]=the-fellowship-of-the-ring`;
+    
+    try{
+        const response = await fetch(baseUrl);
+        const data = await response.json();
+        return data;
+    }
+    catch(error){
+        console.error(error);
+    }
   } 
 
  export async function getStrapiDataEachBookID(bookID){

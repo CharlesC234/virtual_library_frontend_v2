@@ -1,16 +1,24 @@
 "use client";
 import { usePathname } from 'next/navigation'
-
-
-// export default function ExampleClientComponent() {
-//     const pathname = usePathname()
-//     return <p>Current pathname: {pathname}</p>
-// }
+import { useEffect, useState } from "react";
+import { getStrapiDataEachBookwID } from "../components/getBookArray";
 
 export default function Books() {
+    const [bookArr, setBookArr] = useState();
+    const pathname = usePathname().slice(1);
+    var y = 0;
+
+    useEffect(() => {
+        if(bookArr == {}){
+            getStrapiDataEachBookwID(pathname).then((res) => {
+                setBookArr(res);
+            })
+        }
+    }, [])
+
+    console.log(bookArr);
 
     return <main>
-
 
         <div class="container my-24 mx-auto md:px-6">
             
@@ -28,15 +36,11 @@ export default function Books() {
                         <div class="w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12">
                             <div class="px-6 py-12 md:px-12">
                                 <h2 class="mb-4 text-2xl font-bold">
-                                Book Title
+                                {/* {bookArr.data} */}
                                 </h2>
                                 
                                 <p class="mb-6 text-neutral-500 dark:text-neutral-300">
-                                Book description: xxxxxxxx xxx xxx xxx xxxxxxxxxx xxx xxx xx xxxxx xxx xxxxxx xx xxx xxxx 
-                                xxx xxxxxxxx xxx xxx xxx xxxxxxxxxx xxx xxx xx xxxxx xxx xxxxxx xx xxx xxxx xxx
-                                xxxxxxxx xxx xxx xxx xxxxxxxxxx xxx xxx xx xxxxx xxx xxxxxx xx xxx xxxx xxx
-                                xxxxxxxx xxx xxx xxx xxxxxxxxxx xxx xxx xx xxxxx xxx xxxxxx xx xxx xxxx xxx
-                                xxxxxxxx xxx xxx xxx xxxxxxxxxx xxx xxx xx xxxxx xxx xxxxxx xx xxx xxxx xxx
+                                Book description: 
                                 </p>
                                 
                                 {/* Button row */}

@@ -1,15 +1,17 @@
-"use client";
+"use sever";
 import "../globals.css";
 import Books from "./books";
 import Login from "../login/login";
 
-export default function BooksPage({}) {
+export default async function BooksPage({}) {
 
 
   return (
     <div>
       <Login>
-      <Books />
+      <Books
+      
+      />
       </Login>
     </div>
   );

@@ -29,7 +29,7 @@ export default function Main({}) {
         }
     })
 
-    //console.log(booksData.data[2]);
+    //console.log(bookArr);
 
     return <main>
 
