@@ -23,13 +23,13 @@ export default function Main() {
     const [dropdown2, setdropdown2] = useState(false);
     const categories = [
       "fantasy",
-      "science fiction",
+      "science-fiction",
       "mystery",
       "thriller",
       "romance",
-      "historical fiction",
+      "historical-fiction",
       "horror",
-      "young adult",
+      "young-adult",
       "non-fiction",
       "biography/memoir"
     ];

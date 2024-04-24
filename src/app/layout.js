@@ -53,13 +53,13 @@ export default function RootLayout({ children }) {
   const [category, setCategory] = useState(null);
   const categories = [
     "fantasy",
-    "science fiction",
+    "science-fiction",
     "mystery",
     "thriller",
     "romance",
-    "historical fiction",
+    "historical-fiction",
     "horror",
-    "young adult",
+    "young-adult",
     "non-fiction",
     "biography/memoir"
   ];
@@ -114,7 +114,7 @@ export default function RootLayout({ children }) {
       if(bookArray != null && bookArray.length > 0){
       sortByLevenshteinDistance(bookArray, inputStr).then((res) => {
         const temp = [res[0]];
-        for(let i = 1; i < res.length; i++){
+        for(let i = 1; i < res.length - 1; i++){
             if(res[i].attributes.name != res[i - 1].attributes.name){
                 temp.push(res[i]);
    
