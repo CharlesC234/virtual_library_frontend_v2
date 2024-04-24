@@ -26,8 +26,7 @@ async function getStrapiData(user){
   }
   
   export async function getStrapiDataEachBookwID(bookID){
-    const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/books?populate=*&filters[book_id][$eq]=the-fellowship-of-the-ring`;
-    
+    const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/books?populate=*&filters[book_id][$eq]=${bookID}`;
     try{
         const response = await fetch(baseUrl);
         const data = await response.json();
@@ -37,19 +36,6 @@ async function getStrapiData(user){
         console.error(error);
     }
   } 
-
- export async function getStrapiDataEachBookID(bookID){
-    const baseUrl = `https://virtuallibrarybackendstrapi-production.up.railway.app/api/books?populate=*&filters[book_id][$eq]=the-return-of-the-king`;
-    try{
-        const response = await fetch(baseUrl);
-        const data = await response.json();
-        return data;
-    }
-    catch(error){
-        console.error(error);
-    }
-  } 
-
 
   export default async function getBooksForUser(user) {
     const res = await getStrapiData(user);

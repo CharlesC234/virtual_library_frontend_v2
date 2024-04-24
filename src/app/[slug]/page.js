@@ -1,4 +1,4 @@
-"use sever";
+"use server";
 import "../globals.css";
 import Books from "./books";
 import Login from "../login/login";

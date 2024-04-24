@@ -4,22 +4,24 @@ import { useEffect, useState } from "react";
 import { getStrapiDataEachBookwID } from "../components/getBookArray";
 
 export default function Books() {
-    const [bookArr, setBookArr] = useState();
+    const [bookArr, setBookArr] = useState(null); // Initialize with null
     const pathname = usePathname().slice(1);
-    var y = 0;
 
     useEffect(() => {
-        if(bookArr == {}){
+        if(!bookArr){ // Check if bookArr is falsy
             getStrapiDataEachBookwID(pathname).then((res) => {
                 setBookArr(res);
-            })
+            });
         }
-    }, [])
+    }, [bookArr]); // Add bookArr to dependency array
 
-    console.log(bookArr);
+    //console.log(bookArr.data[0].attributes.cover.data.attributes.url);
 
+    if(!bookArr){
+        return <main></main>
+    }
+    else{
     return <main>
-
         <div class="container my-24 mx-auto md:px-6">
             
             {/* Book info block */}
@@ -29,18 +31,32 @@ export default function Books() {
                     <div class="flex flex-wrap items-center">
                         {/* Book cover */}
                         <div class="hidden shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
-                            <img src="https://strapi-aws-s3-books-bucket.s3.us-east-1.amazonaws.com/thumbnail_The_Two_Towers_cover_ac11f0bc59.gif" alt="Trendy Pants and Shoes"
+                            <img src={bookArr.data[0].attributes.cover.data.attributes.url} alt=""
                                 class="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
                         </div>
                         {/* Book text info container */}
                         <div class="w-full shrink-0 grow-0 basis-auto lg:w-6/12 xl:w-8/12">
                             <div class="px-6 py-12 md:px-12">
                                 <h2 class="mb-4 text-2xl font-bold">
-                                {/* {bookArr.data} */}
+                                {bookArr.data[0].attributes.name}
                                 </h2>
                                 
                                 <p class="mb-6 text-neutral-500 dark:text-neutral-300">
-                                Book description: 
+                                {bookArr.data[0].attributes.description}
+                                </p>
+                                
+                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                Written by: {bookArr.data[0].attributes.author}, {bookArr.data[0].attributes.publication_year}
+                                </p>
+
+                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                Published by: {bookArr.data[0].attributes.publisher}
+                                </p>
+
+                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                <em>
+                                    Genre: {bookArr.data[0].attributes.category}
+                                </em>
                                 </p>
                                 
                                 {/* Button row */}
@@ -86,8 +102,7 @@ export default function Books() {
                 </div>
             </section>
             {/* Book info block */}
-
         </div>
-
     </main>
+    }
 }
