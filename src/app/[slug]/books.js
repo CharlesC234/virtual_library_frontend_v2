@@ -39,7 +39,7 @@ export default function Books() {
                     <div class="flex flex-wrap items-center">
                         {/* Book cover */}
                         <div class="hidden shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
-                            <img src={bookArr.data[0].attributes.cover.data.attributes.url} alt=""
+                            <img src={bookArr.data[0].attributes.cover.data != null ? bookArr.data[0].attributes.cover.data.attributes.url : "https://www.svgrepo.com/show/475352/book.svg"} alt=""
                                 class="w-full rounded-t-lg lg:rounded-tr-none lg:rounded-bl-lg" />
                         </div>
                         {/* Book text info container */}
@@ -73,7 +73,7 @@ export default function Books() {
                                     role="group">
                                     
                                     {/* Read book button */}
-                                    <a target="_blank" href={bookArr.data[0].attributes.pdf.data.attributes.url} rel="noopener noreferrer">
+                                    <a target="_blank" href={bookArr.data[0].attributes.pdf.data != null ? bookArr.data[0].attributes.pdf.data.attributes.url : "/"} rel="noopener noreferrer">
                                         <button
                                             type="button"
                                             class="inline-block bg-blue-500 mx-2 rounded bg-primary-600 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-primary-accent-300 focus:outline-none focus:ring-0 active:bg-primary-600 motion-reduce:transition-none"

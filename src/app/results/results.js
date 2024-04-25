@@ -63,7 +63,7 @@ export default function Main() {
                 <th scope="row" class="flex text-gray-900 whitespace-nowrap  text-white">
                 <a class="flex items-center w-full" href={item.attributes.book_id}>
                     <div className="items-center px-6 py-4 flex flex-row">
-                    <img class="w-10 h-10 rounded-full" src={item.attributes.cover != null ? item.attributes.cover.data.attributes.url : "/"}/>
+                    <img class="w-10 h-10 rounded-full" src={item.attributes.cover.data != null ? item.attributes.cover.data.attributes.url : "https://www.svgrepo.com/show/475352/book.svg"}/>
                     <div class="ps-3">
                         <div class="text-base font-semibold">{item.attributes.name}</div>
                     </div>  

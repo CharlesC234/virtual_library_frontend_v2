@@ -240,7 +240,7 @@ export default function RootLayout({ children }) {
                       <img
                         className="my-auto"
                         style={{height: 60, width: 60, borderRadius: "100%" }}
-                        src={item.attributes.cover != null ? item.attributes.cover.data.attributes.url : "/"}
+                        src={item.attributes.cover.data != null ? item.attributes.cover.data.attributes.url : "https://www.svgrepo.com/show/475352/book.svg"}
                       />
                     </div>
                     <h5

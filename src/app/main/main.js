@@ -66,7 +66,7 @@ export default function Main({}) {
                             {/* Card image */}
                             <center>
                                 <a href="#!">
-                                    <img class="t-lg" src={item.attributes.cover ? item.attributes.cover.data.attributes.formats.thumbnail.url : "/"} alt=""/>
+                                <img class="t-lg" style={{height:250}} src={item.attributes.cover.data != null ? item.attributes.cover.data.attributes.formats.thumbnail.url : "https://www.svgrepo.com/show/475352/book.svg"} alt=""/>
                                 </a>
                             </center>
 
@@ -117,7 +117,7 @@ export default function Main({}) {
                 {/* Card image */}
                 <center>
                     <a href="#!">
-                        <img class="t-lg" src={item.attributes.cover ? item.attributes.cover.data.attributes.formats.thumbnail.url : "/"} alt=""/>
+                        <img class="t-lg" style={{height:250}} src={item.attributes.cover.data != null ? item.attributes.cover.data.attributes.formats.thumbnail.url : "https://www.svgrepo.com/show/475352/book.svg"} alt=""/>
                     </a>
                 </center>
 
