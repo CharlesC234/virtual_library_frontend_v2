@@ -222,7 +222,7 @@ export default function Main() {
             <p class="mb-2 text-sm text-gray-500  text-gray-400"><span class="font-semibold">Click</span> or drag and drop</p>
             <p class="text-xs text-gray-500  text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
         </div>
-        <input onChange={handleChangeCover} id="dropzone-file" type="file" class="hidden" />
+        <input onChange={handleChangeCover} accept="image/*" id="dropzone-file" type="file" class="hidden" />
     </label>
     : 
     <div class="flex items-center justify-center mt-3 aspect-square" style={{borderRadius: 20, height: 200}}>
@@ -244,7 +244,7 @@ export default function Main() {
             <p class="mb-2 text-sm text-gray-500  text-gray-400"><span class="font-semibold">Click</span> or drag and drop</p>
             <p class="text-xs text-gray-500  text-gray-400">PDF</p>
         </div>
-        <input onChange={handleChangeBook} id="dropzone-file" type="file" class="hidden" />
+        <input onChange={handleChangeBook} accept=".pdf" id="dropzone-file" type="file" class="hidden" />
     </label> :
      <div class="flex items-center justify-center mt-3 aspect-square" style={{borderRadius: 20, height: 200}}>
      <p>{uploadedBook.name}</p>
