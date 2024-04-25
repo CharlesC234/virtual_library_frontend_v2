@@ -46,7 +46,7 @@ export default function CreateAccount() {
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-300">Username</label>
           <div class="mt-2">
-            <input onChange={(e) => setUsername(e.target.value)} id="username" name="username" type="username" autocomplete="username" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            <input onChange={(e) => setUsername(e.target.value)} id="username" name="username" type="username" autocomplete="username" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  bg-gray-700  border-gray-600  placeholder-gray-400  text-white  focus:ring-blue-500  focus:border-blue-500"/>
           </div>
         </div>
 
@@ -55,7 +55,7 @@ export default function CreateAccount() {
             <label for="password" class="block text-sm font-medium leading-6 text-gray-300">Email</label>
           </div>
           <div class="mt-2">
-            <input onChange={(e) => setEmail(e.target.value)} id="password" name="password" type="email" autocomplete="current-password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            <input onChange={(e) => setEmail(e.target.value)} id="password" name="password" type="email" autocomplete="current-password" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  bg-gray-700  border-gray-600  placeholder-gray-400  text-white  focus:ring-blue-500  focus:border-blue-500"/>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ export default function CreateAccount() {
             <label for="password" class="block text-sm font-medium leading-6 text-gray-300">Password</label>
           </div>
           <div class="mt-2">
-            <input onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="text" autocomplete="current-password" required class="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            <input onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="text" autocomplete="current-password" required class="bg-gray-50 mb-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  bg-gray-700  border-gray-600  placeholder-gray-400  text-white  focus:ring-blue-500  focus:border-blue-500"/>
             <PasswordChecklist
                rules={["minLength","number"]}
                minLength={10}

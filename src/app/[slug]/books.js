@@ -35,7 +35,7 @@ export default function Books() {
             {/* Book info block */}
             <section class="mb-32">
                 <div
-                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                    class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  bg-neutral-700">
                     <div class="flex flex-wrap items-center">
                         {/* Book cover */}
                         <div class="hidden shrink-0 grow-0 basis-auto lg:flex lg:w-6/12 xl:w-4/12">
@@ -49,19 +49,19 @@ export default function Books() {
                                 {bookArr.data[0].attributes.name}
                                 </h2>
                                 
-                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                <p class="mb-6 text-neutral-500  text-neutral-300">
                                 {bookArr.data[0].attributes.description}
                                 </p>
                                 
-                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                <p class="mb-6 text-neutral-500  text-neutral-300">
                                 Written by: {bookArr.data[0].attributes.author}
                                 </p>
 
-                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                <p class="mb-6 text-neutral-500  text-neutral-300">
                                 Published by: {bookArr.data[0].attributes.publisher}, {bookArr.data[0].attributes.publication_year}
                                 </p>
 
-                                <p class="mb-6 text-neutral-500 dark:text-neutral-300">
+                                <p class="mb-6 text-neutral-500  text-neutral-300">
                                 <em>
                                     Genre: {bookArr.data[0].attributes.category}
                                 </em>
@@ -69,7 +69,7 @@ export default function Books() {
                                 
                                 {/* Button row */}
                                 <div
-                                    class="inline-flex shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none dark:shadow-black/30 dark:hover:shadow-dark-1 dark:focus:shadow-dark-1 dark:active:shadow-dark-1"
+                                    class="inline-flex shadow-primary-3 transition duration-150 ease-in-out hover:bg-primary-accent-300 hover:shadow-primary-2 focus:bg-primary-accent-300 focus:shadow-primary-2 focus:outline-none focus:ring-0 active:bg-primary-600 active:shadow-primary-2 motion-reduce:transition-none  shadow-black/30  hover:shadow-dark-1  focus:shadow-dark-1  active:shadow-dark-1"
                                     role="group">
                                     
                                     {/* Read book button */}
