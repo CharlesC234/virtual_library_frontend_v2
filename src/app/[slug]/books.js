@@ -49,19 +49,19 @@ export default function Books() {
                                 {bookArr.data[0].attributes.name}
                                 </h2>
                                 
-                                <p class="mb-6 text-neutral-500  text-neutral-300">
+                                <p class="mb-6 text-neutral-300">
                                 {bookArr.data[0].attributes.description}
                                 </p>
                                 
-                                <p class="mb-6 text-neutral-500  text-neutral-300">
+                                <p class="mb-6 text-neutral-300">
                                 Written by: {bookArr.data[0].attributes.author}
                                 </p>
 
-                                <p class="mb-6 text-neutral-500  text-neutral-300">
+                                <p class="mb-6 text-neutral-300">
                                 Published by: {bookArr.data[0].attributes.publisher}, {bookArr.data[0].attributes.publication_year}
                                 </p>
 
-                                <p class="mb-6 text-neutral-500  text-neutral-300">
+                                <p class="mb-6 text-neutral-300">
                                 <em>
                                     Genre: {bookArr.data[0].attributes.category}
                                 </em>
