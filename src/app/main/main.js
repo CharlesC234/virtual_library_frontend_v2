@@ -61,7 +61,7 @@ export default function Main({}) {
                     <div key={index}>
 
                         {/* Whole card */}
-                        <div class="block rounded-lg bg-white shadow-lg  bg-neutral-700 text-center">
+                        <div class="block rounded-lg shadow-lg  bg-neutral-700 text-center">
 
                             {/* Card image */}
                             <center>
@@ -112,7 +112,7 @@ export default function Main({}) {
         <div key={index}>
 
             {/* Whole card */}
-            <div class="block rounded-lg bg-white shadow-lg  bg-neutral-700 text-center">
+            <div class="block rounded-lg shadow-lg  bg-neutral-700 text-center">
 
                 {/* Card image */}
                 <center>

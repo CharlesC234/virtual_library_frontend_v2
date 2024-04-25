@@ -265,7 +265,7 @@ export default function RootLayout({ children }) {
 </button>
     <button onClick={() => {query()}} type="button" class="ms-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2.5 text-center  bg-blue-600  hover:bg-blue-700  focus:ring-blue-800 py-0">Search</button>
 </div>
-<div id="dropdown" style={{width: '40%', right: '10%'}}class={`z-10 mt-7 absolute ${dropdown ? "visible" : "hidden"} bg-white divide-y divide-gray-100 rounded-lg shadow  bg-gray-900`}>
+<div id="dropdown" style={{width: '40%', right: '10%'}}class={`z-10 mt-7 absolute ${dropdown ? "visible" : "hidden"}  divide-y divide-gray-100 rounded-lg shadow  bg-gray-900`}>
     <ul class="py-2 flex flex-row text-sm text-gray-700  text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li>
         <div class="block px-4 py-2 hover:bg-gray-100  hover:bg-gray-600">Author</div>
@@ -316,13 +316,13 @@ export default function RootLayout({ children }) {
 </svg>
 </button>
 
-<div id="dropdownRadioHelper" class={`z-10 ${dropdown2 ? "visible" : "hidden"} absolute mt-7 bg-white divide-y divide-gray-100 rounded-lg shadow w-60  bg-gray-700  bg-gray-900`}>
+<div id="dropdownRadioHelper" class={`z-10 ${dropdown2 ? "visible" : "hidden"} absolute mt-7 divide-y divide-gray-100 rounded-lg shadow w-60  bg-gray-700  bg-gray-900`}>
     <ul class="p-3 space-y-1 text-sm text-gray-700  text-gray-200" aria-labelledby="dropdownRadioHelperButton">
       {categories.map((item, index) => {
         return <li key={index}> 
         <div class="flex items-center ps-2 rounded hover:bg-gray-100  hover:bg-gray-600">
           <input onChange={() => {setCategory(item)}} id="helper-radio-4" name="helper-radio" type="radio" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-blue-600  ring-offset-gray-700  focus:ring-offset-gray-700 focus:ring-2  bg-gray-600  border-gray-500"/>
-          <label for="checkbox-item-11" class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded  text-gray-300">{item}</label>
+          <label for="checkbox-item-11" class="w-full py-2 ms-2 text-sm font-medium rounded  text-gray-300">{item}</label>
         </div>
       </li>
       })}
