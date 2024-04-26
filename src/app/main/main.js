@@ -43,14 +43,14 @@ export default function Main({}) {
         <section class="text-center text-neutral-600  text-neutral-200">
 
             {/* Main headings */}
-            <h1 class="text-5xl font-bold mb-5">BookWise</h1>
-            <h4 class="text-2xl italic text-neutral-500  text-neutral-400 mb-8">The at-home Virtual Library</h4>
+            <h1 class="text-5xl text-neutral-200 font-bold mb-5">BookWise</h1>
+            <h4 class="text-2xl italic text-neutral-400 mb-8">The at-home Virtual Library</h4>
 
             {/* Divider */}
             <hr class="h-[2px] bg-gray-100  bg-gray-600 my-10 border-none" />
 
             {/* Section heading */}
-            <h3 class="text-3xl font-bold mb-4">My books</h3>
+            <h3 class="text-3xl text-neutral-200 font-bold mb-4">My books</h3>
 
             {/* Grid */}
             <div class="grid grid-cols-3 gap-8 mt-9">
@@ -77,7 +77,7 @@ export default function Main({}) {
                             <div class="p-6">
 
                                 {/* Book title */}
-                                <h5 class="mb-2 text-xl font-bold tracking-wide text-neutral-800  text-neutral-50">
+                                <h5 class="mb-2 text-xl font-bold tracking-wide text-neutral-50">
                                 {item.attributes.name}
                                 </h5>
 
@@ -101,7 +101,7 @@ export default function Main({}) {
             {/* Divider */}
             <hr class="h-[2px] bg-gray-100  bg-gray-600 my-10 border-none" />
 
-            <h3 class="text-3xl font-bold mb-4 mt-10">Public books</h3>
+            <h3 class="text-3xl font-bold text-neutral-200 mb-4 mt-10">Public books</h3>
 
 {/* Grid */}
 <div class="grid grid-cols-3 gap-8 mt-9">
@@ -128,7 +128,7 @@ export default function Main({}) {
                 <div class="p-6">
 
                     {/* Book title */}
-                    <h5 class="mb-2 text-xl font-bold tracking-wide text-neutral-800  text-neutral-50">
+                    <h5 class="mb-2 text-xl font-bold tracking-wide  text-neutral-50">
                     {item.attributes.name}
                     </h5>
 
