@@ -266,7 +266,7 @@ export default function RootLayout({ children }) {
     <button onClick={() => {query()}} type="button" class="ms-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-3xl text-sm px-4 py-2.5 text-center  bg-blue-600  hover:bg-blue-700  focus:ring-blue-800 py-0">Search</button>
 </div>
 <div id="dropdown" style={{width: '40%', right: '10%'}}class={`z-10 mt-7 absolute ${dropdown ? "visible" : "hidden"}  divide-y divide-gray-100 rounded-lg shadow  bg-gray-900`}>
-    <ul class="py-2 flex flex-row text-sm text-gray-700  text-gray-200" aria-labelledby="dropdownDefaultButton">
+    <ul class="py-2 flex flex-row text-sm text-gray-200" aria-labelledby="dropdownDefaultButton">
       <li>
         <div class="block px-4 py-2 hover:bg-gray-100  hover:bg-gray-600">Author</div>
         <div class="p-3">
